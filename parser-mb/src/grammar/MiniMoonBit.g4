@@ -48,6 +48,8 @@ type_annotation: COLON type;
 
 fn_decl_stmt: nontop_fn_decl ';' stmt;
 
+get_expr: value_expr '[' expr ']'; // x[y]
+
 assign_stmt:
 	get_expr '=' expr ';' stmt; // x[y] = z;
 expr_stmt: expr;
@@ -74,7 +76,7 @@ if_expr: 'if' expr block_expr ('else' block_expr)?;
 get_or_apply_level_expr:
 	| value_expr
 	| get_or_apply_level_expr '[' expr ']' // x[y]
-	| get_or_apply_level_expr '(' (expr (',' expr)*)? ')'; // f(x, y)
+	| get_or_apply_level_expr '(' expr (',' expr)* ')'; // f(x, y)
 
 // Value expressions
 value_expr:
